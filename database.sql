@@ -1,0 +1,13 @@
+CREATE TABLE IF NOT EXISTS users (
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	is_activated BOOLEAN NOT NULL DEFAULT 'f',
+	activation_link VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS token (
+	user_id INTEGER,
+	refresh_token VARCHAR(255) NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users (id)
+);
